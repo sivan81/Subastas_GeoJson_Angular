@@ -39,8 +39,10 @@ export class AppComponent implements OnInit {
   // Método para el cambio de página actual (paginación)
   setPage(page: number) {  // Método llamado `setPage` que toma un número de página como argumento.
     this.currentPage = page;  // Establece la página actual al número que fue pasado como argumento.
+    console.log('currentPage:', this.currentPage);
     const startItem = (this.currentPage - 1) * this.itemsPerPage;  // Calcula el índice del primer elemento que se mostrará en la página actual.
-    const endItem = this.currentPage * this.itemsPerPage;  // Calcula el índice del último elemento que se mostrará en la página actual.
+    const endItem = Math.min(this.properties.length,this.currentPage * this.itemsPerPage);  // Calcula el índice del último elemento que se mostrará en la página actual.
+    console.log('startItem:', startItem, 'endItem:', endItem);
     this.displayedProperties = this.properties.slice(startItem, endItem);  // Usando `slice()`, extraemos los elementos que corresponden a la página actual de la lista completa de propiedades.
   }
 
