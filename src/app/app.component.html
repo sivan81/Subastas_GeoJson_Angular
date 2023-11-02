@@ -7,8 +7,8 @@
   <div class="details-section">
     <h4 style="color: cornflowerblue;">{{property['Descripción']}}</h4>
     <div class="price-details">
-      <!-- <span class="valor-subasta">{{ (property['Valor subasta'] | number:'1.2-2':'es') }} €</span>
-      <span class="cantidad-reclamada">{{ (property['Cantidad reclamada'] | number:'1.2-2':'es') }} €</span> -->
+      <span class="valor-subasta">{{ formatNumber(property['Valor subasta']) }} €</span>
+      <span class="cantidad-reclamada">{{ formatNumber(property['Cantidad reclamada']) }} €</span>
       <span class="descuento">{{ property.discount }}%</span>
     </div>
     <p class="informacion">{{property['Tipo inmueble']}}, situado en {{property['Dirección']}}, {{property['Código Postal']}} - {{property.Provincia}}</p>
