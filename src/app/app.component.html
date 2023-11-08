@@ -1,7 +1,6 @@
-<div *ngFor="let property of displayedProperties; trackBy: trackByPropertyId" class="property-card">
+<div *ngFor="let property of displayedProperties; let i = index; trackBy: trackByPropertyId" class="property-card">
   <div class="map-section">
-    <!-- Aquí irá el mapa. Por ahora, solo es un placeholder -->
-    <div class="map-placeholder"></div>
+    <app-map [id]="'map' + i" [lat]="property.lat" [lng]="property.lng"></app-map>
   </div>
 
   <div class="details-section">

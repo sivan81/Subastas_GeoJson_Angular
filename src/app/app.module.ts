@@ -9,14 +9,16 @@ import { HttpClientModule } from '@angular/common/http';
 // Importaciones para localizacion
 import { LOCALE_ID } from '@angular/core';
 import { registerLocaleData } from '@angular/common';
-import localeEs from '@angular/common/locales/es'; 
+import localeEs from '@angular/common/locales/es';
+import { MapComponent } from './map/map.component'; 
 
 // Registro de localizacion
 registerLocaleData(localeEs);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
