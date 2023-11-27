@@ -1,6 +1,6 @@
 <div *ngFor="let property of displayedProperties; let i = index; trackBy: trackByPropertyId" class="property-card">
   <div class="map-section">
-    <app-map [id]="'map' + i" [lat]="property.lat" [lng]="property.lng"></app-map>
+    <app-map [lat]="property.lat" [lng]="property.lng" [uniqueId]="'map' + property.id"></app-map>
   </div>
 
   <div class="details-section">
