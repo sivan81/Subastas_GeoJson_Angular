@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   itemsPerPage: number = 5; // Elementos por página
   itemsPerPageOptions: number[] = [5, 10, 25, 50]; // Almacena las opciones de items por página
   displayedProperties: any[] = []; // Es una lista que contiene las propiedades de los ítems que están siendo mostrados en la página actual. Esta lista se actualiza cuando cambian los ítems mostrados en la página.
+  key: number = 1; // Propiedad para forzar la actualización
 
 
   constructor(private geojsonService: GeojsonService) {} // Inyecta el servicio
@@ -44,6 +45,7 @@ export class AppComponent implements OnInit {
     const endItem = Math.min(this.properties.length,this.currentPage * this.itemsPerPage);  // Calcula el índice del último elemento que se mostrará en la página actual.
     // console.log('startItem:', startItem, 'endItem:', endItem);
     this.displayedProperties = this.properties.slice(startItem, endItem);  // Usando `slice()`, extraemos los elementos que corresponden a la página actual de la lista completa de propiedades.
+    this.key++;
   }
 
   

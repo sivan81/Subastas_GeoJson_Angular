@@ -1,63 +1,47 @@
-<div *ngFor="let property of displayedProperties; let i = index; trackBy: trackByPropertyId" class="property-card">
-  <div class="map-section">
-    <app-map [lat]="property.lat" [lng]="property.lng" [uniqueId]="'map' + property.id"></app-map>
+  <div *ngFor="let property of displayedProperties; let i = index; trackBy: trackByPropertyId" class="property-card">
+    <div class="map-section">
+      <app-map [lat]="property.lat" [lng]="property.lng" [uniqueId]="'map' + i + '_' + key"></app-map>
+    </div>
+
+    <div class="details-section">
+      <h4 style="color: cornflowerblue;">{{property['Descripción']}}</h4>
+      <div class="price-details">
+        <span class="valor-subasta">{{ formatNumber(property['Valor subasta']) }} €</span>
+        <span class="cantidad-reclamada">{{ formatNumber(property['Cantidad reclamada']) }} €</span>
+        <span class="descuento">{{ property.discount }}%</span>
+      </div>
+      <p class="informacion">{{property['Tipo inmueble']}}, situado en {{property['Dirección']}}, {{property['Código
+        Postal']}} - {{property.Provincia}}</p>
+      <div class="info-subasta-seccion">
+        <span class="info-subasta">{{property['Tipo de subasta']}}</span>
+        <span class="info-subasta">{{property.codSubasta}}</span>
+      </div>
+      <!-- <button class="favourite-button">❤️</button> -->
+    </div>
   </div>
 
-  <div class="details-section">
-    <h4 style="color: cornflowerblue;">{{property['Descripción']}}</h4>
-    <div class="price-details">
-      <span class="valor-subasta">{{ formatNumber(property['Valor subasta']) }} €</span>
-      <span class="cantidad-reclamada">{{ formatNumber(property['Cantidad reclamada']) }} €</span>
-      <span class="descuento">{{ property.discount }}%</span>
-    </div>
-    <p class="informacion">{{property['Tipo inmueble']}}, situado en {{property['Dirección']}}, {{property['Código Postal']}} - {{property.Provincia}}</p>
-    <div class="info-subasta-seccion">
-      <span class="info-subasta">{{property['Tipo de subasta']}}</span>
-      <span class="info-subasta">{{property.codSubasta}}</span>
-    </div>
-    <!-- <button class="favourite-button">❤️</button> -->
+
+  <label>Elementos por página:
+    <!-- Este es un elemento de selección desplegable que permite al usuario elegir cuántos elementos desea ver por página. -->
+    <select [(ngModel)]="itemsPerPage" (change)="setPage(1)">
+      <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option>
+      <!-- Aquí, estamos creando dinámicamente las opciones del desplegable en función de los valores en 'itemsPerPageOptions' -->
+      <!-- '[value]="option"' establece el valor del <option> al valor actual del ciclo, y '{{ option }}' muestra ese valor como texto del <option>. -->
+    </select>
+  </label>
+
+
+  <!-- Controles de paginación -->
+  <div class="pagination-controls">
+    <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
+    <!-- La directiva [disabled] desactivará el botón si la condición entre comillas es verdadera. En este caso, si 'currentPage' es 1, el botón "Anterior" se desactivará porque ya estás en la primera página. -->
+    <span>Página {{currentPage}} de {{ getCeil(properties.length / itemsPerPage) }}</span>
+    <!-- Etiqueta que muestra en qué página te encuentras y cuántas páginas hay en total -->
+    <!-- 'currentPage' muestra la página actual y 'getCeil(properties.length / itemsPerPage)' calcula y muestra el número total de páginas. 'getCeil' redondea hacia arriba, asegurando que si hay un número fraccionario de páginas, se redondee a la página completa más cercana. -->
+    <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === getCeil(properties.length / itemsPerPage)">Siguiente</button>
   </div>
-</div>
-
-
-<label>Elementos por página: 
-  <!-- Este es un elemento de selección desplegable que permite al usuario elegir cuántos elementos desea ver por página. -->
-  <select [(ngModel)]="itemsPerPage" (change)="setPage(1)">
-    <option *ngFor="let option of itemsPerPageOptions" [value]="option">{{ option }}</option> <!-- Aquí, estamos creando dinámicamente las opciones del desplegable en función de los valores en 'itemsPerPageOptions' -->
-    <!-- '[value]="option"' establece el valor del <option> al valor actual del ciclo, y '{{ option }}' muestra ese valor como texto del <option>. -->
-  </select>
-</label>
-
-
-<!-- Controles de paginación -->
-<div class="pagination-controls">
-  <button (click)="setPage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button> <!-- La directiva [disabled] desactivará el botón si la condición entre comillas es verdadera. En este caso, si 'currentPage' es 1, el botón "Anterior" se desactivará porque ya estás en la primera página. -->
-  <span>Página {{currentPage}} de {{ getCeil(properties.length / itemsPerPage) }}</span> <!-- Etiqueta que muestra en qué página te encuentras y cuántas páginas hay en total -->
-  <!-- 'currentPage' muestra la página actual y 'getCeil(properties.length / itemsPerPage)' calcula y muestra el número total de páginas. 'getCeil' redondea hacia arriba, asegurando que si hay un número fraccionario de páginas, se redondee a la página completa más cercana. -->
-  <button (click)="setPage(currentPage + 1)" [disabled]="currentPage === getCeil(properties.length / itemsPerPage)">Siguiente</button>
-</div>
 
 
 
-<!--          Descripción: {{property['Descripción']}}
-              Valor Subasta: </strong>{{property['Valor subasta'] | number:'1.2-2':'es'}} €</p>
-              <p class="mb-2"><strong>Cantidad reclamada:</strong> {{property['Cantidad reclamada'] |
-                number:'1.2-2':'es'}} €</p>
-              <p class="mb-2"><strong>Estado: </strong>{{property.estado}}</p>
-              <p class="mb-2"><strong>Lote:</strong> {{property.lote}}</p>
-              <p class="mb-2"><strong>Coordenadas:</strong> {{property.lat}} {{property.lng}}</p>
-              <p class="mb-2"><strong>Fecha de conclusión:</strong> {{property['Fecha de conclusión']}}</p>
-              <p class="mb-2"><strong>Referencia catastral:</strong> {{property['Referencia catastral']}}</p>
-              <p class="mb-2"><strong>Dirección:</strong> {{property['Dirección']}}</p>
-              <p class="mb-2"><strong>Provincia:</strong> {{property.Provincia}}</p>
-              <p class="mb-2"><strong>Código Postal:</strong> {{property['Código Postal']}}</p>
-              <p class="mb-2"><strong>Tipo de inmueble:</strong> {{property['Tipo inmueble']}}</p>
-              <p class="mb-2"><strong>Precisión:</strong> {{property.precision}}</p>
-              <p class="mb-2"><strong>Nuevo inmueble:</strong> {{property.nuevoInmueble}}</p>
-              <p class="mb-2"><strong>Fecha de inicio:</strong> {{property['Fecha de inicio']}}</p>
-            
-                <span class="text-muted d-block"><strong>ID:</strong> {{ property.idInmueble }}</span>
-                <span class="text-muted d-block"><strong>Tipo de Subasta:</strong> {{property['Tipo de subasta']}}</span>
-                <span class="text-muted d-block"><strong>Código de Subasta:</strong> {{property.codSubasta}}</span>
-                <span class="text-muted d-block"><strong>Puja:</strong> {{property.Puja}}</span> 
-              -->
+              
+              
