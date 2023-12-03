@@ -1,24 +1,27 @@
-  <div *ngFor="let property of displayedProperties; let i = index; trackBy: trackByPropertyId" class="property-card">
-    <div class="map-section">
-      <app-map [lat]="property.lat" [lng]="property.lng" [uniqueId]="'map' + i + '_' + key"></app-map>
-    </div>
-
-    <div class="details-section">
-      <h4 style="color: cornflowerblue;">{{property['Descripción']}}</h4>
-      <div class="price-details">
-        <span class="valor-subasta">{{ formatNumber(property['Valor subasta']) }} €</span>
-        <span class="cantidad-reclamada">{{ formatNumber(property['Cantidad reclamada']) }} €</span>
-        <span class="descuento">{{ property.discount }}%</span>
+  <ng-container *ngIf="key">
+    <div *ngFor="let property of displayedProperties; let i = index; trackBy: trackByPropertyId" class="property-card">
+      <div class="map-section">
+        <app-map [lat]="property.lat" [lng]="property.lng" [uniqueId]="'map' + i + '_' + key"></app-map>
       </div>
-      <p class="informacion">{{property['Tipo inmueble']}}, situado en {{property['Dirección']}}, {{property['Código
-        Postal']}} - {{property.Provincia}}</p>
-      <div class="info-subasta-seccion">
-        <span class="info-subasta">{{property['Tipo de subasta']}}</span>
-        <span class="info-subasta">{{property.codSubasta}}</span>
+  
+      <div class="details-section">
+        <h4 style="color: cornflowerblue;">{{property['Descripción']}}</h4>
+        <div class="price-details">
+          <span class="valor-subasta">{{ formatNumber(property['Valor subasta']) }} €</span>
+          <span class="cantidad-reclamada">{{ formatNumber(property['Cantidad reclamada']) }} €</span>
+          <span class="descuento">{{ property.discount }}%</span>
+        </div>
+        <p class="informacion">{{property['Tipo inmueble']}}, situado en {{property['Dirección']}}, {{property['Código
+          Postal']}} - {{property.Provincia}}</p>
+        <div class="info-subasta-seccion">
+          <span class="info-subasta">{{property['Tipo de subasta']}}</span>
+          <span class="info-subasta">{{property.codSubasta}}</span>
+        </div>
+        <!-- <button class="favourite-button">❤️</button> -->
       </div>
-      <!-- <button class="favourite-button">❤️</button> -->
     </div>
-  </div>
+  </ng-container>
+  
 
 
   <label>Elementos por página:

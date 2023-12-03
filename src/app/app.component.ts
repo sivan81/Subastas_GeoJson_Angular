@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { GeojsonService } from './geojson.service'; // Importa el servicio
 
 @Component({
@@ -17,7 +17,8 @@ export class AppComponent implements OnInit {
   itemsPerPage: number = 5; // Elementos por página
   itemsPerPageOptions: number[] = [5, 10, 25, 50]; // Almacena las opciones de items por página
   displayedProperties: any[] = []; // Es una lista que contiene las propiedades de los ítems que están siendo mostrados en la página actual. Esta lista se actualiza cuando cambian los ítems mostrados en la página.
-  key: number = 1; // Propiedad para forzar la actualización
+  key: number = 0; // Propiedad para forzar la actualización
+  //keyChangeTrigger = true;
 
 
   constructor(private geojsonService: GeojsonService) {} // Inyecta el servicio
@@ -46,6 +47,11 @@ export class AppComponent implements OnInit {
     // console.log('startItem:', startItem, 'endItem:', endItem);
     this.displayedProperties = this.properties.slice(startItem, endItem);  // Usando `slice()`, extraemos los elementos que corresponden a la página actual de la lista completa de propiedades.
     this.key++;
+    //this.keyChangeTrigger = !this.keyChangeTrigger; // Esto alternará entre verdadero y falso, forzando la actualización
+    console.log("Valor de key es:" + this.key);
+    //console.log("Valor de keyChangeTrigger es: " + this.keyChangeTrigger);
+    console.log("Valor de currentPage es: " + this.currentPage);
+    console.log("Valor de displayedProperties es: " + this.displayedProperties.length);
   }
 
   
@@ -57,9 +63,16 @@ export class AppComponent implements OnInit {
   }
   
 
+  /*
   trackByPropertyId(index: number, property: any): string {
     return property.id; // Asume que cada property tiene un campo 'id' único.
   }
+  */
+
+  trackByPropertyId(index: number, property: any): any {
+    return property.id || index; // Asegúrate de que cada propiedad tiene un ID único
+  }
+  
 
 
   // Método para hacer que los números que se muestren en pantalla, los considere string
