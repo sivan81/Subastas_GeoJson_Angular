@@ -1,6 +1,9 @@
+  <!-- Contenedor que controla la renderización de los mapas -->
   <ng-container *ngIf="key">
+    <!-- Itera sobre las propiedades mostradas y crea una tarjeta para cada una -->
     <div *ngFor="let property of displayedProperties; let i = index; trackBy: trackByPropertyId" class="property-card">
       <div class="map-section">
+        <!-- Componente de mapa con propiedades vinculadas -->
         <app-map [lat]="property.lat" [lng]="property.lng" [uniqueId]="'map' + i + '_' + key"></app-map>
       </div>
   
@@ -11,8 +14,7 @@
           <span class="cantidad-reclamada">{{ formatNumber(property['Cantidad reclamada']) }} €</span>
           <span class="descuento">{{ property.discount }}%</span>
         </div>
-        <p class="informacion">{{property['Tipo inmueble']}}, situado en {{property['Dirección']}}, {{property['Código
-          Postal']}} - {{property.Provincia}}</p>
+        <p class="informacion">{{property['Tipo inmueble']}}, situado en {{property['Dirección']}}, {{property['Código Postal']}} - {{property.Provincia}}</p>
         <div class="info-subasta-seccion">
           <span class="info-subasta">{{property['Tipo de subasta']}}</span>
           <span class="info-subasta">{{property.codSubasta}}</span>
