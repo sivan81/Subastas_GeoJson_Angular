@@ -1,27 +1,30 @@
-# MapaSubastas
+# Subastas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión 16.2.1.
 
-## Development server
+## Descripción del proyecto
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Subastas es una aplicación web desarrollada en Angular que permite visualizar en un mapa las subastas disponibles. Utiliza GeoJSON para el manejo de los datos geoespaciales.
 
-## Code scaffolding
+## Tecnologías utilizadas
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Angular
+- TypeScript
+- npm
 
-## Build
+## Cómo ejecutar el proyecto
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clona el repositorio en tu máquina local.
+2. Navega hasta el directorio del proyecto.
+3. Ejecuta `npm install` para instalar las dependencias del proyecto.
+4. Ejecuta `ng serve` para iniciar el servidor de desarrollo. Navega a `http://localhost:4200/`. La aplicación se recargará automáticamente si cambias alguno de los archivos de origen.
 
-## Running unit tests
+## Generación de componentes
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Ejecuta `ng generate component component-name` para generar un nuevo componente. También puedes usar `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Running end-to-end tests
+## Construcción del proyecto
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Ejecuta `ng build` para construir el proyecto. Los artefactos de construcción se almacenarán en el directorio `dist/`.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
