@@ -11,6 +11,7 @@ Subastas es una aplicación web desarrollada en Angular que permite visualizar e
 - Angular
 - TypeScript
 - npm
+- OpenStreetMap
 
 ## Cómo ejecutar el proyecto
 
